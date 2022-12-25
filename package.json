@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@syncfusion/ej2-react-calendars": "^20.3.50",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.38",
+    "react": "^18.2.0",
+    "react-moment": "^1.1.2"
+  },
+  "name": "ericl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.students.cs.ubc.ca/CPSC210-2022S-T2/project_f0u2b.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
