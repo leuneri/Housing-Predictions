@@ -2,11 +2,18 @@ from bs4 import BeautifulSoup
 import requests
 
 html_text = requests.get('https://www.rew.ca/properties/areas/vancouver-bc')
-soup = BeautifulSoup(html_text, 'lxml')
-house = soup.find_all('div', class_ = 'col-xs-12 col=md=8').text
-print(soup.prettify())
-
-
+soup = BeautifulSoup(html_text.text, 'lxml')
+house = soup.find('div', class_ = 'displaypanel-content')
+location = house.find('ul', class_ = "inlinelist displaypanel-info")
+neighborhood = location.findAll("li")[0].text
+city = location.findAll("li")[1].text
+information = house.find('div', class_ = 'displaypanel-section clearfix')
+bedrooms = information.findAll("li")[0].text
+bathrooms = information.findAll("li")[1].text
+squareFeet = information.findAll("li")[2].text
+print(bedrooms)
+print(bathrooms)
+print(squareFeet)
 
 
 
