@@ -5,13 +5,11 @@ import time
 import os
 from tabulate import tabulate
 
+
+
 def houseSearch():
-    prices = []
-    neighborhoods = []
-    cities = []
-    bedrooms = []
-    bathrooms = []
-    squareFeet = []
+    insertions = []
+    count = 1
     for i in range(50):
         html_text = requests.get('https://www.rew.ca/properties/areas/greater-vancouver-bc/sort/latest/desc/page/{}?query=Greater+Vancouver%2C+BC'.format(i))
         soup = BeautifulSoup(html_text.text, 'lxml')
@@ -26,19 +24,15 @@ def houseSearch():
                 bedroom = information.findAll("li")[0].text
                 bathroom = information.findAll("li")[1].text
                 size = information.findAll("li")[2].text
-                prices.append(price)
-                neighborhoods.append(neighborhood)
-                cities.append(city)
-                bedrooms.append(bedroom)
-                bathrooms.append(bathroom)
-                squareFeet.append(size)
+                insertion = (count, price, neighborhood, city, bedroom, bathroom, size)
+                insertions.append(insertion)
+                count += 1
+                
             except:
                 continue
 
-    dict = {'Price': prices, 'Neighbourhood': neighborhoods, 'City': cities, 'Bedrooms': bedrooms, 'Bathrooms': bathrooms, "Size (sq feet)": squareFeet}
-    df = pd.DataFrame(dict)
-    print(tabulate(df, headers = 'keys', tablefmt = 'psql'))
-    df.to_csv(os.getcwd()+'\\outputs.csv')
+    print(insertions)
+    return insertions
     
     
 
@@ -46,11 +40,7 @@ def houseSearch():
 if __name__ == "__main__":
     # while True:
     houseSearch()
-    print("Waiting for next cycle")
+#     print("Waiting for next cycle")
         # time.sleep(2678400) # 31 days
 
 
-## Price, Neighborhood, City, Bedrooms, Bathrooms, Square Feet
-## Dimension Hierachy: City -> Neighborhood
-# Fact tables: Price
-# Rolling append for amount of data inputted
